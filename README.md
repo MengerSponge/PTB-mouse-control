@@ -35,3 +35,4 @@ The Arduino IDE will compile this project, and the Teensy loader will load the c
 
 The board needs to mount as a keyboard+mouse, which should be set in Tools>"USB Type"
 
+The click coordinates use Windows display coordinates (0,0) is top-left. It is easiest to measure these coordinates with the "AutoHotKey Dash" > "Windows Spy" utility. AutoHotKey is installed on the DAQ computer.
