@@ -1,72 +1,145 @@
-void flashcount(int blinks) {
+void window_minimize(int blinks) {
+  digitalWrite(ledPin, LOW);
+
+  Keyboard.set_modifier(MODIFIERKEY_GUI);
+  Keyboard.send_now();
+  Keyboard.set_key1(KEY_DOWN);
+  Keyboard.send_now();
+
+  Keyboard.set_modifier(0);
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
+  flashcount(blinks, 125);
+  // Keyboard.set_modifier(MODIFIERKEY_CTRL);
+}
+
+void window_fullscreen(int blinks) {
+  digitalWrite(ledPin, LOW);
+
+  Keyboard.set_modifier(MODIFIERKEY_GUI);
+  Keyboard.send_now();
+  Keyboard.set_key1(KEY_UP);
+  Keyboard.send_now();
+
+  Keyboard.set_modifier(0);
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
+  flashcount(blinks, 125);
+  // Keyboard.set_modifier(MODIFIERKEY_CTRL);
+}
+
+void flashcount(int blinks, int blinktime) {
   int flashes;
   digitalWrite(ledPin, LOW);  // turn the LED off
   for (flashes = 0; flashes < blinks; flashes++) {
     digitalWrite(ledPin, HIGH);  // set the LED on
-    delay(500);
+    delay(blinktime);
     digitalWrite(ledPin, LOW);  // turn the LED off
-    delay(500);
+    if (flashes < blinks) {
+      delay(blinktime);
+    }
   }
 }
 
 void click_ruhe(int blinks, bool sendclick) {
-// top left:  ( 8, 928)
-// bot right: (78, 945)
-// target:    (43, 936)
-  // unsigned short midx = 43;
-  // unsigned short midy = 936;
-  Mouse.moveTo(43, 936);
+  // top left:  ( 5, 54)
+  // bot right: (74, 74)
+  // target:    (50, 68)
+
+  // set focused application to windows bar
+  Mouse.moveTo(1370, 1189);
+  Mouse.click();
+  delay(40);
+  // 126-Kanal menu bar location
+  // top left: (483, 1171)
+  // bottom left: (513, 1195)
+  // target (495, 1180)
+  Mouse.moveTo(495, 1180);
+  Mouse.click();
+  delay(40);
+
+  window_fullscreen(8);
+  Mouse.moveTo(50, 68);
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+  window_minimize(8);
+  flashcount(blinks, 500);
 }
 
+// windowmode(8, 1)
+// Mouse.moveTo(43, 936);
+// if (sendclick) {
+//   Mouse.click();
+// }
+// windowmode(8, 0)
+// flashcount(blinks, 500);
+
 void click_messen(int blinks, bool sendclick) {
-// top left:  ( 80, 975)
-// bot right: (144, 994)
-// target:    (110, 980)
-  Mouse.moveTo(110, 980);
+  // top left:  ( 79, 103)
+  // bot right: (141, 123)
+  // target:    (120, 110)
+
+  // set focused application to windows bar
+  Mouse.moveTo(1370, 1189);
+  Mouse.click();
+  delay(40);
+
+  // 126-Kanal menu bar location
+  // top left: (483, 1171)
+  // bottom left: (513, 1195)
+  // target (495, 1180)
+  Mouse.moveTo(1370, 1189);
+  Mouse.click();
+  delay(40);
+
+  window_fullscreen(8);
+  // windowmode(8, 1);
+  Mouse.moveTo(120, 110);
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+
+  window_minimize(8);
+
+
+  flashcount(blinks, 500);
 }
 
 void click_correction(int blinks, bool sendclick) {
-// top left:  (841, 1119)
-// bot right: (905, 1147)
-// target:    (870, 1130)
+  // top left:  (841, 1119)
+  // bot right: (905, 1147)
+  // target:    (870, 1130)
   Mouse.moveTo(870, 1130);
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+  flashcount(blinks, 500);
 }
 
 void click_reorder(int blinks, bool sendclick) {
-// top left:  (1879, 545)
-// bot right: (1917, 568)
-// target:    (1900, 555)
+  // top left:  (1879, 545)
+  // bot right: (1917, 568)
+  // target:    (1900, 555)
   Mouse.moveTo(1900, 555);
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+  flashcount(blinks, 500);
 }
 
 void click_start(int blinks, bool sendclick) {
-// top left:  (53, 103)
-// bot right: (74, 124)
-// target:    (65, 110)
+  // top left:  (53, 103)
+  // bot right: (74, 124)
+  // target:    (65, 110)
   Mouse.moveTo(65, 110);
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+  flashcount(blinks, 500);
 }
 
-void click_stop(int blinks, bool sendclick) {
+void click_stop(bool sendclick) {
   // stop, comment, finalize
   // 1) Stop
   // top left:  (80, 104)
@@ -78,7 +151,11 @@ void click_stop(int blinks, bool sendclick) {
     Mouse.click();
   }
   delay(400);
+}
+
+void finalize_measurement(int blinks, bool sendclick){
   // 2) Comment
+  // Ok button
   // top left:  (858, 828)
   // bot right: (942, 846)
   // target:    (900, 833)
@@ -105,10 +182,25 @@ void click_stop(int blinks, bool sendclick) {
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks);
+  flashcount(blinks, 500);
 }
 
 void type_comment(String say) {
-  delay(2000);
+  delay(300);
   Keyboard.print(say);
+}
+
+void click_comment_field(bool sendclick){
+  // top left:  (740, 583)
+  // bot right: (1159, 639)
+  // target:    (1000, 600)
+  Mouse.moveTo(1000, 640);
+  delay(1);
+  Mouse.move(-1, -1);
+  delay(1);
+  Mouse.move(1, 1);
+  delay(50);
+  if (sendclick) {
+    Mouse.click();
+  }
 }

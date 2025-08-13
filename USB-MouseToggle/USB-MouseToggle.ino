@@ -6,6 +6,7 @@
 
 // The following constant determines if each command issues a mouse click or not. To debug/test, set to false.
 const bool clickmouse = true;
+const bool resizewindows = true;
 
 const int ledPin = 13;
 bool blink = LOW;
@@ -13,14 +14,15 @@ String words;
 
 int mode = 1;
 // Commands are associated with the "mode" enum type. Send the corresponding ASCII number (0-6) to execute the associated command;
-enum mode { COMMENT,
-            RUHE,
-            MESSEN,
-            CORRECTION,
-            REORDER,
-            START,
-            STOP,
-            COMMENTLOG
+enum mode { COMMENT, // !
+            RUHE, // "
+            MESSEN, // #
+            CORRECTION, // $
+            REORDER, // %
+            START, // &
+            STOP, // '
+            COMMENTLOG, // (
+            TEST // )
             };
 
 // CAUTION: Because the board interprets commands serially and uses numbers as the control characters, you *cannot* use numbers in your comment.
@@ -38,6 +40,18 @@ void setup() {
     delay(200);
   }
 }
+
+// incomingByte shift: 48 for digits 0-9
+// incomingByte shift: 33 for characters
+// COMMENT, // !
+// RUHE, // "
+// MESSEN, // #
+// CORRECTION, // $
+// REORDER, // %
+// START, // &
+// STOP, // '
+// COMMENTLOG, // (
+// TEST // )
 
 void loop() {
   int incomingByte;
@@ -80,11 +94,18 @@ void loop() {
         break;
 
       case STOP:
-        click_stop(6, clickmouse);
+        click_stop(clickmouse);
+        click_comment_field(clickmouse);
+        type_comment(words);
+        finalize_measurement(6, clickmouse);
         HWSERIAL.print("stop");
         break;
       case COMMENTLOG:
         type_comment(words);
+        break;
+      case TEST:
+        window_fullscreen(10);
+        HWSERIAL.print("test fullscreen window");
         break;
       default:
         // HWSERIAL.print("comments incoming");
