@@ -54,34 +54,34 @@ void loop() {
       switch (shiftedByte) {
         case NEWCOMMENT:
           // Reset the accumulated comment string without logging it.
-          HWSERIAL.print("Cleared comment string");
+          HWSERIAL.print("Cleared comment string\n");
           // words = "";
           words = "";
           break;
 
         case RUHE:
           click_ruhe(1, clickmouse);
-          HWSERIAL.print("ruhe");
+          HWSERIAL.print("ruhe\n");
           break;
 
         case MESSEN:
           click_messen(2, clickmouse);
-          HWSERIAL.print("messen");
+          HWSERIAL.print("messen\n");
           break;
 
         case CORRECTION:
           click_correction(3, clickmouse);
-          HWSERIAL.print("correction");
+          HWSERIAL.print("correction\n");
           break;
 
         case REORDER:
           click_reorder(4, clickmouse);
-          HWSERIAL.print("reorder");
+          HWSERIAL.print("reorder\n");
           break;
 
         case START:
           click_start(5, clickmouse);
-          HWSERIAL.print("start");
+          HWSERIAL.print("start\n");
           break;
 
         case STOP:
@@ -91,19 +91,19 @@ void loop() {
           delete_comment(1);
           type_comment(words);
           finalize_measurement(6, clickmouse);
-          HWSERIAL.print("stop");
+          HWSERIAL.print("stop\n");
           words = "";
           break;
         case STOPNOCOMMENT:
           // the comment field is not edited with this command.
           click_stop(clickmouse);
           finalize_measurement(6, clickmouse);
-          HWSERIAL.print("stop no comment");
+          HWSERIAL.print("stop no comment\n");
           break;
         case TEST:
           type_comment(words);
           words = "";
-          HWSERIAL.print("test typing");
+          HWSERIAL.print("test typing\n");
           break;
         default:
           break;

@@ -17,15 +17,15 @@ Send commands as ASCII digits to the USB-UART adapter. Teensy will echo back the
 
 | ASCII | Command | Echo |
 -: | :-----------: | :--:
-\0 | COMMENT | Cleared comment string
-\1 | RUHE | ruhe
-\2 | MESSEN | messen
-\3 | CORRECTION | correction
-\4 | REORDER | reorder
-\5 | START | start
-\6 | STOP | stop
-\7 | STOPNOCOMMENT | stop no comment
-\8 | TEST | _nothing_
+\0 | NEWCOMMENT | Cleared comment string\n
+\1 | RUHE | ruhe\n
+\2 | MESSEN | messen\n
+\3 | CORRECTION | correction\n
+\4 | REORDER | reorder\n
+\5 | START | start\n
+\6 | STOP | stop\n
+\7 | STOPNOCOMMENT | stop no comment\n
+\8 | TEST | test typing\n
 
 ### STOP
 Stop does several things in sequence:
