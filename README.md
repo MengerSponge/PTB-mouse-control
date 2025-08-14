@@ -17,7 +17,7 @@ Send commands as ASCII digits to the USB-UART adapter. Teensy will echo back the
 
 | ASCII | Command | Echo |
 -: | :-----------: | :--:
-\0 | COMMENT | comment
+\0 | COMMENT | Cleared comment string
 \1 | RUHE | ruhe
 \2 | MESSEN | messen
 \3 | CORRECTION | correction

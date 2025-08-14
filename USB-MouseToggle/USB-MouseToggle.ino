@@ -18,7 +18,7 @@ String words;
 
 int mode = 1;
 // Commands are associated with the "mode" enum type. Send the corresponding ASCII number (0-8) to execute the associated command;
-enum mode { COMMENT,        // 0
+enum mode { NEWCOMMENT,        // 0
             RUHE,           // 1
             MESSEN,         // 2
             CORRECTION,     // 3
@@ -52,9 +52,9 @@ void loop() {
     if (commandmode) {
       shiftedByte = incomingByte - 48;
       switch (shiftedByte) {
-        case COMMENT:
+        case NEWCOMMENT:
           // Reset the accumulated comment string without logging it.
-          HWSERIAL.print("Accumulating comment.");
+          HWSERIAL.print("Cleared comment string");
           // words = "";
           words = "";
           break;
