@@ -1,3 +1,5 @@
+const unsigned int windowsUIdelay = 500;
+
 void window_minimize(int blinks) {
   digitalWrite(ledPin, LOW);
 
@@ -9,7 +11,8 @@ void window_minimize(int blinks) {
   Keyboard.set_modifier(0);
   Keyboard.set_key1(0);
   Keyboard.send_now();
-  // flashcount(blinks, 125);
+  delay(windowsUIdelay);
+  // flashcount(blinks, 250);
   // Keyboard.set_modifier(MODIFIERKEY_CTRL);
 }
 
@@ -24,7 +27,7 @@ void window_fullscreen(int blinks) {
   Keyboard.set_modifier(0);
   Keyboard.set_key1(0);
   Keyboard.send_now();
-  // flashcount(blinks, 125);
+  delay(windowsUIdelay);
   // Keyboard.set_modifier(MODIFIERKEY_CTRL);
 }
 
@@ -64,7 +67,7 @@ void click_ruhe(int blinks, bool sendclick) {
     Mouse.click();
   }
   window_minimize(8);
-  flashcount(blinks, 200);
+  flashcount(blinks, 150);
 }
 
 void click_messen(int blinks, bool sendclick) {
@@ -160,7 +163,7 @@ void finalize_measurement(int blinks, bool sendclick){
   if (sendclick) {
     Mouse.click();
   }
-  delay(400);
+  delay(500);
   // 3) Finalize;
   // top left:  (953, 631)
   // bot right: (1033, 647)
@@ -170,7 +173,7 @@ void finalize_measurement(int blinks, bool sendclick){
   Mouse.move(-1, -1);
   delay(1);
   Mouse.move(1, 1);
-  delay(50);
+  delay(500);
   if (sendclick) {
     Mouse.click();
   }
@@ -178,7 +181,7 @@ void finalize_measurement(int blinks, bool sendclick){
 }
 
 void type_comment(String say) {
-  delay(200);
+  // delay(200);
   char *token = strtok(say.c_str(), "|");
   // char delimiters[] = ":|";
   while (token != NULL) {
