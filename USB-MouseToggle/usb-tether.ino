@@ -64,16 +64,8 @@ void click_ruhe(int blinks, bool sendclick) {
     Mouse.click();
   }
   window_minimize(8);
-  flashcount(blinks, 500);
+  flashcount(blinks, 200);
 }
-
-// windowmode(8, 1)
-// Mouse.moveTo(43, 936);
-// if (sendclick) {
-//   Mouse.click();
-// }
-// windowmode(8, 0)
-// flashcount(blinks, 500);
 
 void click_messen(int blinks, bool sendclick) {
   // top left:  ( 79, 103)
@@ -89,7 +81,7 @@ void click_messen(int blinks, bool sendclick) {
   // top left: (483, 1171)
   // bottom left: (513, 1195)
   // target (495, 1180)
-  Mouse.moveTo(1370, 1189);
+  Mouse.moveTo(495, 1180);
   Mouse.click();
   delay(40);
 
@@ -103,7 +95,7 @@ void click_messen(int blinks, bool sendclick) {
   window_minimize(8);
 
 
-  flashcount(blinks, 500);
+  flashcount(blinks, 200);
 }
 
 void click_correction(int blinks, bool sendclick) {
@@ -186,15 +178,58 @@ void finalize_measurement(int blinks, bool sendclick){
 }
 
 void type_comment(String say) {
-  delay(300);
-  Keyboard.print(say);
+  delay(200);
+  char *token = strtok(say.c_str(), "|");
+  // char delimiters[] = ":|";
+  while (token != NULL) {
+    Keyboard.print(token);
+    token = strtok(NULL, "|");
+    Keyboard.press(KEY_ENTER);
+    Keyboard.release(KEY_ENTER);
+  }
+  // Keyboard.print(say);
+}
+
+void delete_comment(int blinks){
+
+  for (int i=0; i<20; i++){
+    Keyboard.press(KEY_DOWN);
+    Keyboard.release(KEY_DOWN);
+    delay(40);
+  }
+  Keyboard.press(KEY_END);
+  Keyboard.release(KEY_END);
+  delay(50);
+
+  Keyboard.set_modifier(MODIFIERKEY_SHIFT);
+  Keyboard.send_now();
+  Keyboard.set_key1(KEY_HOME);
+  Keyboard.send_now();
+  Keyboard.set_modifier(0);
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
+
+  Keyboard.set_modifier(MODIFIERKEY_SHIFT);
+  Keyboard.send_now();
+  Keyboard.set_key1(KEY_UP);
+  Keyboard.send_now();
+  for (int i=0; i<20; i++){
+    delay(50);
+    Keyboard.send_now();
+  }
+  for (int i=0; i<30; i++){
+  Keyboard.press(KEY_BACKSPACE);
+  Keyboard.release(KEY_BACKSPACE);
+  delay(40);
+  }
+  // flashcount(blinks, 125);
 }
 
 void click_comment_field(bool sendclick){
   // top left:  (740, 583)
   // bot right: (1159, 639)
   // target:    (1000, 600)
-  Mouse.moveTo(1000, 640);
+  Mouse.moveTo(1000, 610);
   delay(1);
   Mouse.move(-1, -1);
   delay(1);

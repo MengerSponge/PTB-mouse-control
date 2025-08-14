@@ -14,3 +14,4 @@ void click_start(int blinks, bool sendclick);
 void click_stop(bool sendclick);
 void finalize_measurement(int blinks, bool sendclick);
 void type_comment(String say);
+void delete_comment(int blinks);

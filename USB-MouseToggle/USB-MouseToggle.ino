@@ -21,7 +21,7 @@ enum mode { COMMENT, // !
             REORDER, // %
             START, // &
             STOP, // '
-            COMMENTLOG, // (
+            STOPNOCOMMENT, // (
             TEST // )
             };
 
@@ -43,7 +43,7 @@ void setup() {
 
 // incomingByte shift: 48 for digits 0-9
 // incomingByte shift: 33 for characters
-// COMMENT, // !
+// NEWCOMMENT, // !
 // RUHE, // "
 // MESSEN, // #
 // CORRECTION, // $
@@ -60,7 +60,7 @@ void loop() {
   if (HWSERIAL.available() > 0) {
     incomingByte = HWSERIAL.read();
 
-    shiftedByte = incomingByte - 48;
+    shiftedByte = incomingByte - 33;
     switch (shiftedByte) {
       case COMMENT:
         HWSERIAL.print("Accumulating comment.");
@@ -96,16 +96,21 @@ void loop() {
       case STOP:
         click_stop(clickmouse);
         click_comment_field(clickmouse);
+        delete_comment(1);
         type_comment(words);
         finalize_measurement(6, clickmouse);
         HWSERIAL.print("stop");
+        words = "";
         break;
-      case COMMENTLOG:
-        type_comment(words);
+      case STOPNOCOMMENT:
+        click_stop(clickmouse);
+        finalize_measurement(6, clickmouse);
+        HWSERIAL.print("stop no comment");
         break;
       case TEST:
-        window_fullscreen(10);
-        HWSERIAL.print("test fullscreen window");
+        type_comment(words);
+        words = "";
+        HWSERIAL.print("test typing");
         break;
       default:
         // HWSERIAL.print("comments incoming");
