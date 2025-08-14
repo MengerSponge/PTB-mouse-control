@@ -8,6 +8,9 @@ The board defaults to "character accumulation" mode, where received characters a
 ### \
 Enable command mode. The next character will be interpreted as a command. If it is not a valid command (e.g. \9) exit command mode silently.
 
+### |
+Newline character. If this character is used in the command string, it will be replaced with an "enter" keypress. || will only generate one newline. If you want more than one new line, you get to go play with pointers.
+
 ## Commands
 
 Send commands as ASCII digits to the USB-UART adapter. Teensy will echo back the command (as a string) after executing the requested command.
