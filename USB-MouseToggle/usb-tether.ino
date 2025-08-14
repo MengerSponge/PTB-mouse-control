@@ -9,7 +9,7 @@ void window_minimize(int blinks) {
   Keyboard.set_modifier(0);
   Keyboard.set_key1(0);
   Keyboard.send_now();
-  flashcount(blinks, 125);
+  // flashcount(blinks, 125);
   // Keyboard.set_modifier(MODIFIERKEY_CTRL);
 }
 
@@ -24,7 +24,7 @@ void window_fullscreen(int blinks) {
   Keyboard.set_modifier(0);
   Keyboard.set_key1(0);
   Keyboard.send_now();
-  flashcount(blinks, 125);
+  // flashcount(blinks, 125);
   // Keyboard.set_modifier(MODIFIERKEY_CTRL);
 }
 
@@ -106,7 +106,7 @@ void click_correction(int blinks, bool sendclick) {
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks, 500);
+  flashcount(blinks, 200);
 }
 
 void click_reorder(int blinks, bool sendclick) {
@@ -117,7 +117,7 @@ void click_reorder(int blinks, bool sendclick) {
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks, 500);
+  flashcount(blinks, 200);
 }
 
 void click_start(int blinks, bool sendclick) {
@@ -128,7 +128,7 @@ void click_start(int blinks, bool sendclick) {
   if (sendclick) {
     Mouse.click();
   }
-  flashcount(blinks, 500);
+  flashcount(blinks, 200);
 }
 
 void click_stop(bool sendclick) {
@@ -156,7 +156,7 @@ void finalize_measurement(int blinks, bool sendclick){
   Mouse.move(-1, -1);
   delay(1);
   Mouse.move(1, 1);
-  delay(50);
+  delay(100);
   if (sendclick) {
     Mouse.click();
   }
